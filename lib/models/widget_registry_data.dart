@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sdui_frontend/services/widget_properties_service.dart';
+import '../services/widget_properties_service.dart';
 
 import 'widget_registry_entry.dart';
 
 final List<WidgetRegistryEntry> widgetRegistryEntries = [
-  // ... all WidgetRegistryEntry definitions for SDUI widgets ...
+  // ... all WidgetRegistryEntry definitions for Glimpse widgets ...
   const WidgetRegistryEntry(
-    type: 'SduiColumn',
-    label: 'SduiColumn',
+    type: 'GlimpseColumn',
+    label: 'GlimpseColumn',
     icon: Icons.view_column,
     category: 'Layout Widgets',
-    childrenInfo: 'Multiple SDUI children',
+    childrenInfo: 'Multiple Glimpse children',
     maxChildren: -1,
     canHaveChildren: true,
     propertyDefinitions: [
@@ -54,11 +54,11 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
   ),
 
   const WidgetRegistryEntry(
-    type: 'SduiRow',
-    label: 'SduiRow',
+    type: 'GlimpseRow',
+    label: 'GlimpseRow',
     icon: Icons.view_stream,
     category: 'Layout Widgets',
-    childrenInfo: 'Multiple SDUI children',
+    childrenInfo: 'Multiple Glimpse children',
     maxChildren: -1,
     canHaveChildren: true,
     propertyDefinitions: [
@@ -101,12 +101,12 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
     defaultSize: const Size(200, 300),
   ),
 
- const  WidgetRegistryEntry(
-    type: 'SduiContainer',
-    label: 'SduiContainer',
+  const WidgetRegistryEntry(
+    type: 'GlimpseContainer',
+    label: 'GlimpseContainer',
     icon: Icons.crop_square,
     category: 'Layout Widgets',
-    childrenInfo: 'Single SDUI child',
+    childrenInfo: 'Single Glimpse child',
     maxChildren: 1,
     canHaveChildren: true,
     propertyDefinitions: [
@@ -164,11 +164,11 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
   ),
 
   const WidgetRegistryEntry(
-    type: 'SduiScaffold',
-    label: 'SduiScaffold',
+    type: 'GlimpseScaffold',
+    label: 'GlimpseScaffold',
     icon: Icons.web_asset,
     category: 'Layout Widgets',
-    childrenInfo: 'Single SDUI child (body)',
+    childrenInfo: 'Single Glimpse child (body)',
     maxChildren: 1,
     canHaveChildren: true,
     propertyDefinitions: [
@@ -215,11 +215,11 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
   ),
 
   const WidgetRegistryEntry(
-    type: 'SduiSizedBox',
-    label: 'SduiSizedBox',
+    type: 'GlimpseSizedBox',
+    label: 'GlimpseSizedBox',
     icon: Icons.crop_16_9,
     category: 'Layout Widgets',
-    childrenInfo: 'Single SDUI child (optional)',
+    childrenInfo: 'Single Glimpse child (optional)',
     maxChildren: 1,
     canHaveChildren: true,
     propertyDefinitions: [
@@ -234,8 +234,8 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
   ),
 
   const WidgetRegistryEntry(
-    type: 'SduiSpacer',
-    label: 'SduiSpacer',
+    type: 'GlimpseSpacer',
+    label: 'GlimpseSpacer',
     icon: Icons.space_bar,
     category: 'Layout Widgets',
     childrenInfo: 'No children',
@@ -250,9 +250,9 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
     defaultSize: const Size(0, 0),
   ),
 
- const  WidgetRegistryEntry(
-    type: 'SduiText',
-    label: 'SduiText',
+  const WidgetRegistryEntry(
+    type: 'GlimpseText',
+    label: 'GlimpseText',
     icon: Icons.text_fields,
     category: 'Display Widgets',
     childrenInfo: 'No children',
@@ -328,8 +328,8 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
   ),
 
   const WidgetRegistryEntry(
-    type: 'SduiImage',
-    label: 'SduiImage',
+    type: 'GlimpseImage',
+    label: 'GlimpseImage',
     icon: Icons.image,
     category: 'Display Widgets',
     childrenInfo: 'No children',
@@ -438,8 +438,8 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
   ),
 
   const WidgetRegistryEntry(
-    type: 'SduiIcon',
-    label: 'SduiIcon',
+    type: 'GlimpseIcon',
+    label: 'GlimpseIcon',
     icon: Icons.insert_emoticon,
     category: 'Display Widgets',
     childrenInfo: 'No children',

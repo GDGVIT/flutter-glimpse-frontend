@@ -3,10 +3,10 @@ import '../models/widget_node.dart';
 import '../models/app_theme.dart';
 import '../models/widget_data.dart';
 import '../services/widget_properties_service.dart';
-import 'package:flutter_sdui/flutter_sdui.dart';
+import 'package:flutter_glimpse/flutter_glimpse.dart';
 import 'package:uuid/uuid.dart';
 import 'widget_tree_service.dart';
-import 'sdui_conversion_service.dart';
+import 'glimpse_conversion_service.dart';
 import 'import_export_service.dart';
 
 final Uuid globalUuid = Uuid();
@@ -35,13 +35,13 @@ class DesignCanvasViewModel extends ChangeNotifier {
   static WidgetNode _createDefaultScaffold() {
     return WidgetNode(
       uid: 'scaffold_root',
-      type: 'SduiScaffold',
-      label: 'SduiScaffold',
+      type: 'GlimpseScaffold',
+      label: 'GlimpseScaffold',
       icon: Icons.web_asset,
       position: const Offset(0, 0),
       size: const Size(900, 600),
       children: const [],
-      properties: WidgetPropertiesService.getDefaultProperties('SduiScaffold'),
+      properties: WidgetPropertiesService.getDefaultProperties('GlimpseScaffold'),
     );
   }
 
@@ -119,9 +119,14 @@ class DesignCanvasViewModel extends ChangeNotifier {
     return WidgetTreeService.findWidgetByUid(_rootWidgetNode, _selectedWidgetId);
   }
 
-  // SDUI conversion
-  SduiWidget widgetNodeToSduiWidget(WidgetNode node) {
-    return SduiConversionService.widgetNodeToSduiWidget(node);
+  // Glimpse conversion
+  GlimpseWidget widgetNodeToGlimpseWidget(WidgetNode node) {
+    return GlimpseConversionService.widgetNodeToGlimpseWidget(node);
+  }
+
+  // Legacy method for backward compatibility
+  GlimpseWidget widgetNodeToSduiWidget(WidgetNode node) {
+    return widgetNodeToGlimpseWidget(node);
   }
 
   // Import/Export
@@ -140,12 +145,12 @@ class DesignCanvasViewModel extends ChangeNotifier {
   }
 
   Future<void> exportToFile(String filePath) async {
-    final sduiWidget = widgetNodeToSduiWidget(_rootWidgetNode);
-    await ImportExportService.exportToFile(filePath, sduiWidget);
+    final glimpseWidget = widgetNodeToGlimpseWidget(_rootWidgetNode);
+    await ImportExportService.exportToFile(filePath, glimpseWidget);
   }
 
-  String exportToJsonString(SduiWidget sduiWidget) {
-    return ImportExportService.exportToJsonString(sduiWidget);
+  String exportToJsonString(GlimpseWidget glimpseWidget) {
+    return ImportExportService.exportToJsonString(glimpseWidget);
   }
 
   void reparentWidget(String nodeId, String newParentId) {
@@ -190,11 +195,16 @@ class DesignCanvasViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void importFromSduiJson(Map<String, dynamic> json) {
-    final sduiWidget = SduiParser.parseJSON(json);
-    final widgetNode = SduiConversionService.widgetNodeFromSduiWidget(sduiWidget);
+  void importFromGlimpseJson(Map<String, dynamic> json) {
+    final glimpseWidget = GlimpseParser.parseJSON(json);
+    final widgetNode = GlimpseConversionService.widgetNodeFromGlimpseWidget(glimpseWidget);
     _rootWidgetNode = widgetNode;
     notifyListeners();
+  }
+
+  // Legacy method for backward compatibility
+  void importFromSduiJson(Map<String, dynamic> json) {
+    importFromGlimpseJson(json);
   }
 
   void setRootWidgetNode(WidgetNode node) {

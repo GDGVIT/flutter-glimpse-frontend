@@ -227,7 +227,7 @@ class DesignCanvasState extends State<DesignCanvas> {
     const double edgeThreshold = 56.0;
     const double scrollStep = 24.0;
 
-    if (node.type == 'Column Widget' || node.type == 'SduiColumn') {
+    if (node.type == 'Column Widget' || node.type == 'GlimpseColumn') {
       final double topEdge = rect.top;
       final double bottomEdge = rect.bottom;
       if (py < topEdge + edgeThreshold) {
@@ -237,7 +237,7 @@ class DesignCanvasState extends State<DesignCanvas> {
         final newOffset = (controller.offset + scrollStep).clamp(0.0, controller.position.maxScrollExtent);
         controller.jumpTo(newOffset);
       }
-    } else if (node.type == 'Row Widget' || node.type == 'SduiRow') {
+    } else if (node.type == 'Row Widget' || node.type == 'GlimpseRow') {
       final double leftEdge = rect.left;
       final double rightEdge = rect.right;
       if (px < leftEdge + edgeThreshold) {

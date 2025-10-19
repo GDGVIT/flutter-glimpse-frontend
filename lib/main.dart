@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 // // import 'dart:convert';
 // // import 'dart:io';
 
-// // import 'package:flutter_sdui/src/parser/sdui_proto_parser.dart';
+// // import 'package:flutter_glimpse/src/parser/glimpse_proto_parser.dart';
 
 // // void main() async {
 // //   WidgetsFlutterBinding.ensureInitialized();
@@ -115,7 +115,7 @@ class MyApp extends StatelessWidget {
 // import 'dart:convert';
 
 // import 'package:flutter/material.dart';
-// import 'package:flutter_sdui/flutter_sdui.dart'; // Replace with actual import if needed
+// import 'package:flutter_glimpse/flutter_glimpse.dart'; // Replace with actual import if needed
 
 // class SduiJsonScreen extends StatelessWidget {
 //   const SduiJsonScreen({super.key});

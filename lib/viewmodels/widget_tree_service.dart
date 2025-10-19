@@ -9,7 +9,7 @@ class WidgetTreeService {
     if (root.uid == parentUid) {
       final parentConstraints = WidgetPropertiesService.getConstraints(root.type);
       if (parentConstraints.maxChildren == 0) return root;
-      final isLayoutWidget = root.type == 'Column Widget' || root.type == 'Row Widget' || root.type == 'Stack Widget' || root.type == 'SduiColumn' || root.type == 'SduiRow';
+      final isLayoutWidget = root.type == 'Column Widget' || root.type == 'Row Widget' || root.type == 'Stack Widget' || root.type == 'GlimpseColumn' || root.type == 'GlimpseRow';
       List<WidgetNode> newChildren = List.from(root.children);
       if (!isLayoutWidget && parentConstraints.maxChildren == 1 && newChildren.isNotEmpty) {
         newChildren = [];
@@ -23,7 +23,7 @@ class WidgetTreeService {
         icon: widgetData.icon,
         position: _getStaggeredChildPosition(root, newChildren.length),
         size: (() {
-          if (widgetData.type == 'SduiColumn' || widgetData.type == 'SduiRow' || widgetData.type == 'SduiContainer') {
+          if (widgetData.type == 'GlimpseColumn' || widgetData.type == 'GlimpseRow' || widgetData.type == 'GlimpseContainer') {
             return Size(root.size.width * 0.8, root.size.height * 0.8);
           }
           return WidgetPropertiesService.getDefaultSize(widgetData.type);
@@ -56,7 +56,7 @@ class WidgetTreeService {
           .map((child) => addWidgetToParent(child, parentUid, widgetData))
           .toList();
       WidgetNode updatedNode = root.copyWith(children: updatedChildren);
-      final isLayoutWidget = root.type == 'Column Widget' || root.type == 'Row Widget' || root.type == 'Stack Widget' || root.type == 'SduiColumn' || root.type == 'SduiRow';
+      final isLayoutWidget = root.type == 'Column Widget' || root.type == 'Row Widget' || root.type == 'Stack Widget' || root.type == 'GlimpseColumn' || root.type == 'GlimpseRow';
       if (isLayoutWidget) {
         final Rect bounds = _computeChildrenBounds(updatedChildren);
         double minWidth = root.size.width;
@@ -79,9 +79,9 @@ class WidgetTreeService {
   }
 
   static Offset _getStaggeredChildPosition(WidgetNode parent, int childIndex) {
-    if (parent.type == 'Column Widget' || parent.type == 'SduiColumn') {
+    if (parent.type == 'Column Widget' || parent.type == 'GlimpseColumn') {
       return Offset(10, 10 + 40.0 * childIndex);
-    } else if (parent.type == 'Row Widget' || parent.type == 'SduiRow') {
+    } else if (parent.type == 'Row Widget' || parent.type == 'GlimpseRow') {
       return Offset(10 + 40.0 * childIndex, 10);
     } else {
       return const Offset(10, 10);

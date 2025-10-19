@@ -8,10 +8,10 @@ bool canAcceptChildren(String type) {
          type == 'Column Widget' ||
          type == 'Stack Widget' ||
          type == 'Scaffold' ||
-         type == 'SduiColumn' ||
-         type == 'SduiRow' ||
-         type == 'SduiScaffold' ||
-         type == 'SduiContainer';
+        type == 'GlimpseColumn' ||
+        type == 'GlimpseRow' ||
+        type == 'GlimpseScaffold' ||
+        type == 'GlimpseContainer';
 }
 
 bool isDescendant(WidgetNode parent, WidgetNode possibleDescendant) {

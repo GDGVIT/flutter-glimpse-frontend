@@ -12,13 +12,13 @@ class WidgetConstraints {
       case 'Column Widget':
       case 'Row Widget':
       case 'Stack Widget':
-      case 'SduiColumn':
-      case 'SduiRow':
-      case 'SduiStack':
+      case 'GlimpseColumn':
+      case 'GlimpseRow':
+      case 'GlimpseStack':
         return WidgetConstraints(canHaveChildren: true, maxChildren: -1);
       case 'Container Widget':
-      case 'SduiContainer':
-      case 'SduiScaffold':
+      case 'GlimpseContainer':
+      case 'GlimpseScaffold':
         return WidgetConstraints(canHaveChildren: true, maxChildren: 1);
       default:
         return WidgetConstraints(canHaveChildren: false, maxChildren: 0);

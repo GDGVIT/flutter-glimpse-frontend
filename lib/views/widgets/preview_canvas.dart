@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/widget_node.dart';
 import '../../models/app_theme.dart';
-import 'package:flutter_sdui/flutter_sdui.dart';
+import 'package:flutter_glimpse/flutter_glimpse.dart';
 import '../../viewmodels/design_canvas_viewmodel.dart';
 import 'preview_pane.dart';
 
@@ -17,7 +17,7 @@ class PreviewCanvas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sduiWidget = DesignCanvasViewModel().widgetNodeToSduiWidget(widgetRoot);
-    return PreviewPane(sduiRoot: sduiWidget.toFlutterWidget());
+    final glimpseWidget = DesignCanvasViewModel().widgetNodeToGlimpseWidget(widgetRoot);
+    return PreviewPane(sduiRoot: glimpseWidget.toFlutterWidget());
   }
 } 

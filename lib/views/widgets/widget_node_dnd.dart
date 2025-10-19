@@ -39,7 +39,7 @@ Widget buildWidgetNodeWithDnD({
 }) {
   final isSelected = selectedWidgetId == node.uid;
   final isHovered = hoveredWidgetId == node.uid;
-  final isScaffold = node.type == 'Scaffold' || node.type == 'SduiScaffold';
+  final isScaffold = node.type == 'Scaffold' || node.type == 'GlimpseScaffold';
   final visualSize = node.size;
   final visualPosition = node.position;
   final canAccept = canAcceptChildren(node.type);
@@ -48,7 +48,7 @@ Widget buildWidgetNodeWithDnD({
   GlobalKey dropKey = dropTargetKeys[node.uid] ??= GlobalKey();
 
   Widget childContent;
-  if (node.type == 'Row Widget' || node.type == 'SduiRow') {
+  if (node.type == 'Row Widget' || node.type == 'GlimpseRow') {
     final rowController = getNodeScrollController(node.uid);
     childContent = SizedBox(
       width: node.size.width,
@@ -95,7 +95,7 @@ Widget buildWidgetNodeWithDnD({
         ),
       ),
     );
-  } else if (node.type == 'Column Widget' || node.type == 'SduiColumn') {
+  } else if (node.type == 'Column Widget' || node.type == 'GlimpseColumn') {
     final columnController = getNodeScrollController(node.uid);
     childContent = SizedBox(
       width: node.size.width,
@@ -163,15 +163,15 @@ Widget buildWidgetNodeWithDnD({
         ],
       ),
     );
-  } else if (node.type == 'Stack Widget' || node.type == 'SduiStack') {
+  } else if (node.type == 'Stack Widget' || node.type == 'GlimpseStack') {
     childContent = Stack(
       children: node.children.map((child) => buildWidgetNodeWithDnD(child, depth + 1, insideStack: true)).toList(),
     );
-  } else if (node.type == 'SduiContainer') {
+  } else if (node.type == 'GlimpseContainer') {
     childContent = node.children.isNotEmpty
       ? buildWidgetNodeWithDnD(node.children.first, depth + 1, insideStack: false)
       : const SizedBox.shrink();
-  } else if (node.type == 'Scaffold' || node.type == 'SduiScaffold') {
+  } else if (node.type == 'Scaffold' || node.type == 'GlimpseScaffold') {
     final showAppBar = node.properties['showAppBar'] as bool? ?? true;
     final appBarTitle = node.properties['appBarTitle']?.toString() ?? '';
     final appBarColor = parseColor(node.properties['appBarBackgroundColor']?.toString() ?? '#FF232323');
@@ -372,13 +372,13 @@ class _EndDropGhost extends StatelessWidget {
         if (selection != null) {
           switch (selection) {
             case _QuickAddItem.row:
-              onQuickAdd(parentId, const WidgetData(type: 'SduiRow', label: 'Row', icon: Icons.view_stream, position: Offset.zero));
+              onQuickAdd(parentId, const WidgetData(type: 'GlimpseRow', label: 'Row', icon: Icons.view_stream, position: Offset.zero));
               break;
             case _QuickAddItem.column:
-              onQuickAdd(parentId, const WidgetData(type: 'SduiColumn', label: 'Column', icon: Icons.view_column, position: Offset.zero));
+              onQuickAdd(parentId, const WidgetData(type: 'GlimpseColumn', label: 'Column', icon: Icons.view_column, position: Offset.zero));
               break;
             case _QuickAddItem.text:
-              onQuickAdd(parentId, const WidgetData(type: 'SduiText', label: 'Text', icon: Icons.text_fields, position: Offset.zero));
+              onQuickAdd(parentId, const WidgetData(type: 'GlimpseText', label: 'Text', icon: Icons.text_fields, position: Offset.zero));
               break;
           }
         }

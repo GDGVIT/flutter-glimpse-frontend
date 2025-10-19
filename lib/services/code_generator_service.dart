@@ -4,19 +4,19 @@ import '../viewmodels/design_canvas_viewmodel.dart';
 
 class CodeGeneratorService {
   static String generateCode(WidgetNode scaffoldWidget, AppTheme theme) {
-    // If root is SDUI, output Dart code using SDUI widgets
-    if (scaffoldWidget.type.startsWith('Sdui')) {
-      final sduiWidget = DesignCanvasViewModel().widgetNodeToSduiWidget(scaffoldWidget);
+    // If root is Glimpse, output Dart code using Glimpse widgets
+    if (scaffoldWidget.type.startsWith('Glimpse')) {
+      final glimpseWidget = DesignCanvasViewModel().widgetNodeToGlimpseWidget(scaffoldWidget);
       final buffer = StringBuffer();
       buffer.writeln("import 'package:flutter/material.dart';");
-      buffer.writeln("import 'package:flutter_sdui/flutter_sdui.dart';");
+      buffer.writeln("import 'package:flutter_glimpse/flutter_glimpse.dart';");
       buffer.writeln('');
-      buffer.writeln('class GeneratedSduiWidget extends StatelessWidget {');
-      buffer.writeln('  const GeneratedSduiWidget({super.key});');
+      buffer.writeln('class GeneratedGlimpseWidget extends StatelessWidget {');
+      buffer.writeln('  const GeneratedGlimpseWidget({super.key});');
       buffer.writeln('');
       buffer.writeln('  @override');
       buffer.writeln('  Widget build(BuildContext context) {');
-      buffer.writeln('    return ${_generateSduiWidgetCode(sduiWidget, 2)};');
+      buffer.writeln('    return ${_generateGlimpseWidgetCode(glimpseWidget, 2)};');
       buffer.writeln('  }');
       buffer.writeln('}');
       return buffer.toString();
@@ -36,100 +36,100 @@ class CodeGeneratorService {
     return buffer.toString();
   }
 
-  static String _generateSduiWidgetCode(dynamic sduiWidget, int indent) {
+  static String _generateGlimpseWidgetCode(dynamic glimpseWidget, int indent) {
     final indentStr = '  ' * indent;
     final buffer = StringBuffer();
-    final type = sduiWidget.runtimeType.toString();
+    final type = glimpseWidget.runtimeType.toString();
     switch (type) {
-      case 'SduiScaffold':
-        buffer.write('SduiScaffold(');
-        if (sduiWidget.appBar != null) buffer.write('\n${indentStr}appBar: ${_generateSduiWidgetCode(sduiWidget.appBar, indent + 1)},');
-        if (sduiWidget.backgroundColor != null) buffer.write('\n${indentStr}backgroundColor: Color(${sduiWidget.backgroundColor.value}),');
-        if (sduiWidget.body != null) buffer.write('\n${indentStr}body: ${_generateSduiWidgetCode(sduiWidget.body, indent + 1)},');
+      case 'GlimpseScaffold':
+        buffer.write('GlimpseScaffold(');
+        if (glimpseWidget.appBar != null) buffer.write('\n${indentStr}appBar: ${_generateGlimpseWidgetCode(glimpseWidget.appBar, indent + 1)},');
+        if (glimpseWidget.backgroundColor != null) buffer.write('\n${indentStr}backgroundColor: Color(${glimpseWidget.backgroundColor.value}),');
+        if (glimpseWidget.body != null) buffer.write('\n${indentStr}body: ${_generateGlimpseWidgetCode(glimpseWidget.body, indent + 1)},');
         buffer.write('\n${'  ' * (indent - 1)})');
         break;
-      case 'SduiColumn':
-        buffer.write('SduiColumn(');
-        if (sduiWidget.children != null && sduiWidget.children.isNotEmpty) {
+      case 'GlimpseColumn':
+        buffer.write('GlimpseColumn(');
+        if (glimpseWidget.children != null && glimpseWidget.children.isNotEmpty) {
           buffer.write('\n${indentStr}children: [');
-          for (final child in sduiWidget.children) {
-            buffer.write('\n${indentStr}  ${_generateSduiWidgetCode(child, indent + 2)},');
+          for (final child in glimpseWidget.children) {
+            buffer.write('\n${indentStr}  ${_generateGlimpseWidgetCode(child, indent + 2)},');
           }
           buffer.write('\n${indentStr}],');
         }
-        if (sduiWidget.mainAxisAlignment != null) buffer.write('\n${indentStr}mainAxisAlignment: MainAxisAlignment.${sduiWidget.mainAxisAlignment.toString().split('.').last},');
-        if (sduiWidget.crossAxisAlignment != null) buffer.write('\n${indentStr}crossAxisAlignment: CrossAxisAlignment.${sduiWidget.crossAxisAlignment.toString().split('.').last},');
+        if (glimpseWidget.mainAxisAlignment != null) buffer.write('\n${indentStr}mainAxisAlignment: MainAxisAlignment.${glimpseWidget.mainAxisAlignment.toString().split('.').last},');
+        if (glimpseWidget.crossAxisAlignment != null) buffer.write('\n${indentStr}crossAxisAlignment: CrossAxisAlignment.${glimpseWidget.crossAxisAlignment.toString().split('.').last},');
         buffer.write('\n${'  ' * (indent - 1)})');
         break;
-      case 'SduiRow':
-        buffer.write('SduiRow(');
-        if (sduiWidget.children != null && sduiWidget.children.isNotEmpty) {
+      case 'GlimpseRow':
+        buffer.write('GlimpseRow(');
+        if (glimpseWidget.children != null && glimpseWidget.children.isNotEmpty) {
           buffer.write('\n${indentStr}children: [');
-          for (final child in sduiWidget.children) {
-            buffer.write('\n${indentStr}  ${_generateSduiWidgetCode(child, indent + 2)},');
+          for (final child in glimpseWidget.children) {
+            buffer.write('\n${indentStr}  ${_generateGlimpseWidgetCode(child, indent + 2)},');
           }
           buffer.write('\n${indentStr}],');
         }
-        if (sduiWidget.mainAxisAlignment != null) buffer.write('\n${indentStr}mainAxisAlignment: MainAxisAlignment.${sduiWidget.mainAxisAlignment.toString().split('.').last},');
-        if (sduiWidget.crossAxisAlignment != null) buffer.write('\n${indentStr}crossAxisAlignment: CrossAxisAlignment.${sduiWidget.crossAxisAlignment.toString().split('.').last},');
+        if (glimpseWidget.mainAxisAlignment != null) buffer.write('\n${indentStr}mainAxisAlignment: MainAxisAlignment.${glimpseWidget.mainAxisAlignment.toString().split('.').last},');
+        if (glimpseWidget.crossAxisAlignment != null) buffer.write('\n${indentStr}crossAxisAlignment: CrossAxisAlignment.${glimpseWidget.crossAxisAlignment.toString().split('.').last},');
         buffer.write('\n${'  ' * (indent - 1)})');
         break;
-      case 'SduiContainer':
-        buffer.write('SduiContainer(');
-        if (sduiWidget.width != null) buffer.write('\n${indentStr}width: ${sduiWidget.width},');
-        if (sduiWidget.height != null) buffer.write('\n${indentStr}height: ${sduiWidget.height},');
-        if (sduiWidget.color != null) buffer.write('\n${indentStr}color: Color(${sduiWidget.color.value}),');
-        if (sduiWidget.child != null) buffer.write('\n${indentStr}child: ${_generateSduiWidgetCode(sduiWidget.child, indent + 1)},');
+      case 'GlimpseContainer':
+        buffer.write('GlimpseContainer(');
+        if (glimpseWidget.width != null) buffer.write('\n${indentStr}width: ${glimpseWidget.width},');
+        if (glimpseWidget.height != null) buffer.write('\n${indentStr}height: ${glimpseWidget.height},');
+        if (glimpseWidget.color != null) buffer.write('\n${indentStr}color: Color(${glimpseWidget.color.value}),');
+        if (glimpseWidget.child != null) buffer.write('\n${indentStr}child: ${_generateGlimpseWidgetCode(glimpseWidget.child, indent + 1)},');
         buffer.write('\n${'  ' * (indent - 1)})');
         break;
-      case 'SduiText':
-        buffer.write('SduiText(');
-        buffer.write("'${sduiWidget.text.replaceAll("'", "\\'")}'");
-        if (sduiWidget.fontSize != null) buffer.write(', fontSize: ${sduiWidget.fontSize}');
-        if (sduiWidget.color != null) buffer.write(', color: Color(${sduiWidget.color.value})');
-        if (sduiWidget.textAlign != null) buffer.write(', textAlign: TextAlign.${sduiWidget.textAlign.toString().split('.').last}');
+      case 'GlimpseText':
+        buffer.write('GlimpseText(');
+        buffer.write("'${glimpseWidget.text.replaceAll("'", "\\'")}'");
+        if (glimpseWidget.fontSize != null) buffer.write(', fontSize: ${glimpseWidget.fontSize}');
+        if (glimpseWidget.color != null) buffer.write(', color: Color(${glimpseWidget.color.value})');
+        if (glimpseWidget.textAlign != null) buffer.write(', textAlign: TextAlign.${glimpseWidget.textAlign.toString().split('.').last}');
         buffer.write(')');
         break;
-      case 'SduiImage':
-        buffer.write('SduiImage(');
-        buffer.write("'${sduiWidget.src}'");
-        if (sduiWidget.width != null) buffer.write(', width: ${sduiWidget.width}');
-        if (sduiWidget.height != null) buffer.write(', height: ${sduiWidget.height}');
-        if (sduiWidget.fit != null) buffer.write(', fit: BoxFit.${sduiWidget.fit.toString().split('.').last}');
+      case 'GlimpseImage':
+        buffer.write('GlimpseImage(');
+        buffer.write("'${glimpseWidget.src}'");
+        if (glimpseWidget.width != null) buffer.write(', width: ${glimpseWidget.width}');
+        if (glimpseWidget.height != null) buffer.write(', height: ${glimpseWidget.height}');
+        if (glimpseWidget.fit != null) buffer.write(', fit: BoxFit.${glimpseWidget.fit.toString().split('.').last}');
         buffer.write(')');
         break;
-      case 'SduiIcon':
-        buffer.write('SduiIcon(');
-        if (sduiWidget.icon != null) buffer.write('icon: ${sduiWidget.icon},');
-        if (sduiWidget.size != null) buffer.write('size: ${sduiWidget.size},');
-        if (sduiWidget.color != null) buffer.write('color: Color(${sduiWidget.color.value}),');
+      case 'GlimpseIcon':
+        buffer.write('GlimpseIcon(');
+        if (glimpseWidget.icon != null) buffer.write('icon: ${glimpseWidget.icon},');
+        if (glimpseWidget.size != null) buffer.write('size: ${glimpseWidget.size},');
+        if (glimpseWidget.color != null) buffer.write('color: Color(${glimpseWidget.color.value}),');
         buffer.write(')');
         break;
-      case 'SduiSpacer':
-        buffer.write('SduiSpacer(');
-        if (sduiWidget.flex != null) buffer.write('flex: ${sduiWidget.flex},');
+      case 'GlimpseSpacer':
+        buffer.write('GlimpseSpacer(');
+        if (glimpseWidget.flex != null) buffer.write('flex: ${glimpseWidget.flex},');
         buffer.write(')');
         break;
-      case 'SduiSizedBox':
-        buffer.write('SduiSizedBox(');
-        if (sduiWidget.width != null) buffer.write('width: ${sduiWidget.width},');
-        if (sduiWidget.height != null) buffer.write('height: ${sduiWidget.height},');
-        if (sduiWidget.child != null) buffer.write('child: ${_generateSduiWidgetCode(sduiWidget.child, indent + 1)},');
+      case 'GlimpseSizedBox':
+        buffer.write('GlimpseSizedBox(');
+        if (glimpseWidget.width != null) buffer.write('width: ${glimpseWidget.width},');
+        if (glimpseWidget.height != null) buffer.write('height: ${glimpseWidget.height},');
+        if (glimpseWidget.child != null) buffer.write('child: ${_generateGlimpseWidgetCode(glimpseWidget.child, indent + 1)},');
         buffer.write(')');
         break;
-      case 'SduiAppBar':
-        buffer.write('SduiAppBar(');
-        if (sduiWidget.title != null) buffer.write("title: '${sduiWidget.title}',");
-        if (sduiWidget.backgroundColor != null) buffer.write('backgroundColor: Color(${sduiWidget.backgroundColor.value}),');
-        if (sduiWidget.foregroundColor != null) buffer.write('foregroundColor: Color(${sduiWidget.foregroundColor.value}),');
-        if (sduiWidget.elevation != null) buffer.write('elevation: ${sduiWidget.elevation},');
-        if (sduiWidget.centerTitle != null) buffer.write('centerTitle: ${sduiWidget.centerTitle},');
-        if (sduiWidget.toolbarHeight != null) buffer.write('toolbarHeight: ${sduiWidget.toolbarHeight},');
-        if (sduiWidget.leadingWidth != null) buffer.write('leadingWidth: ${sduiWidget.leadingWidth},');
-        if (sduiWidget.automaticallyImplyLeading != null) buffer.write('automaticallyImplyLeading: ${sduiWidget.automaticallyImplyLeading},');
-        if (sduiWidget.titleSpacing != null) buffer.write('titleSpacing: ${sduiWidget.titleSpacing},');
-        if (sduiWidget.toolbarOpacity != null) buffer.write('toolbarOpacity: ${sduiWidget.toolbarOpacity},');
-        if (sduiWidget.bottomOpacity != null) buffer.write('bottomOpacity: ${sduiWidget.bottomOpacity},');
+      case 'GlimpseAppBar':
+        buffer.write('GlimpseAppBar(');
+        if (glimpseWidget.title != null) buffer.write("title: '${glimpseWidget.title}',");
+        if (glimpseWidget.backgroundColor != null) buffer.write('backgroundColor: Color(${glimpseWidget.backgroundColor.value}),');
+        if (glimpseWidget.foregroundColor != null) buffer.write('foregroundColor: Color(${glimpseWidget.foregroundColor.value}),');
+        if (glimpseWidget.elevation != null) buffer.write('elevation: ${glimpseWidget.elevation},');
+        if (glimpseWidget.centerTitle != null) buffer.write('centerTitle: ${glimpseWidget.centerTitle},');
+        if (glimpseWidget.toolbarHeight != null) buffer.write('toolbarHeight: ${glimpseWidget.toolbarHeight},');
+        if (glimpseWidget.leadingWidth != null) buffer.write('leadingWidth: ${glimpseWidget.leadingWidth},');
+        if (glimpseWidget.automaticallyImplyLeading != null) buffer.write('automaticallyImplyLeading: ${glimpseWidget.automaticallyImplyLeading},');
+        if (glimpseWidget.titleSpacing != null) buffer.write('titleSpacing: ${glimpseWidget.titleSpacing},');
+        if (glimpseWidget.toolbarOpacity != null) buffer.write('toolbarOpacity: ${glimpseWidget.toolbarOpacity},');
+        if (glimpseWidget.bottomOpacity != null) buffer.write('bottomOpacity: ${glimpseWidget.bottomOpacity},');
         buffer.write(')');
         break;
       default:
