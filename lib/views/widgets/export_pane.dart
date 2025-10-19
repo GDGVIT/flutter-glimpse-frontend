@@ -57,9 +57,9 @@ class ExportPane extends StatelessWidget {
           const SizedBox(height: 12),
           ElevatedButton(
             onPressed: () async {
-              final sduiWidget = viewModel.widgetNodeToSduiWidget(viewModel.widgetRoot);
-              final sduiJson = viewModel.exportToJsonString(sduiWidget);
-              await Clipboard.setData(ClipboardData(text: sduiJson));
+              final glimpseWidget = viewModel.widgetNodeToGlimpseWidget(viewModel.widgetRoot);
+              final glimpseJson = viewModel.exportToJsonString(glimpseWidget);
+              await Clipboard.setData(ClipboardData(text: glimpseJson));
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('JSON copied to clipboard')),
               );

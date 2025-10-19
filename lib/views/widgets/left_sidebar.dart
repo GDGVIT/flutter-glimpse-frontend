@@ -89,7 +89,7 @@ class LeftSidebar extends StatelessWidget {
         },
         isProjectNonEmpty: () {
           // Consider project non-empty if root has children or is not default
-          return scaffoldWidget.children.isNotEmpty || scaffoldWidget.type != 'SduiScaffold';
+          return scaffoldWidget.children.isNotEmpty || scaffoldWidget.type != 'GlimpseScaffold';
         },
       );
     } else if (selectedPane == 'export') {

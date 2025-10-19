@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:provider/provider.dart';
-import 'package:flutter_sdui/src/service/sdui_grpc_client.dart';
-import 'package:flutter_sdui/src/parser/sdui_proto_parser.dart';
-import 'package:flutter_sdui/src/generated/sdui.pb.dart';
+import 'package:flutter_glimpse/src/service/glimpse_grpc_client.dart';
+import 'package:flutter_glimpse/src/parser/glimpse_proto_parser.dart';
+import 'package:flutter_glimpse/src/generated/glimpse.pb.dart';
 import '../../viewmodels/design_canvas_viewmodel.dart';
-import '../../viewmodels/sdui_conversion_service.dart';
+import '../../viewmodels/glimpse_conversion_service.dart';
 
 class ImportPane extends StatefulWidget {
   final void Function(String) onImportJson;
@@ -178,15 +178,15 @@ class _ImportPaneState extends State<ImportPane> {
                 return;
               }
               int port = int.tryParse(portStr) ?? 50051;
-              final client = SduiGrpcClient(host: host, port: port);
+              final client = GlimpseGrpcClient(host: host, port: port);
               try {
-                final SduiWidgetData data = await client.getWidget(screenId);
-                final sduiWidget = SduiParser.parseProto(data);
-                if (sduiWidget != null) {
-                  final widgetNode = SduiConversionService.widgetNodeFromSduiWidget(sduiWidget);
+                final GlimpseWidgetData data = await client.getWidget(screenId);
+                final glimpseWidget = GlimpseParser.parseProto(data);
+                if (glimpseWidget != null) {
+                  final widgetNode = GlimpseConversionService.widgetNodeFromGlimpseWidget(glimpseWidget);
                   Provider.of<DesignCanvasViewModel>(context, listen: false)
                     ..setSelectedPane('build')
-                    ..importFromSduiJson({}) // placeholder, will set below
+                    ..importFromGlimpseJson({}) // placeholder, will set below
                   ;
                   // Directly set the root widget node
                   Provider.of<DesignCanvasViewModel>(context, listen: false).setRootWidgetNode(widgetNode);
