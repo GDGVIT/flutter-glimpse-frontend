@@ -83,30 +83,26 @@ This project follows MVVM architecture patterns and Flutter best practices. The 
 
 
 ## Features
-- [ ]  < feature >
-- [ ]  < feature >
-- [ ]  < feature >
-- [ ]  < feature >
+- [x] **Drag and Drop Interface**: Drag widgets from the left sidebar onto the design canvas
+- [x] **Visual Widget Library**: Pre-built widgets including Row, Column, Scaffold, Text, Container, and Card
+- [x] **Properties Panel**: Edit widget properties in real-time with color picker support
+- [x] **Device Preview**: Preview your design on different device sizes and orientations
+- [x] **Widget Tree Visualization**: View and manage the hierarchical structure of your widgets
+- [x] **Import/Export Functionality**: Import and export design files and generated code
+- [x] **Theme Management**: Customize app themes with color schemes and typography
+- [x] **Code Generation**: Generate Flutter code from your visual designs
 
 <br>
 
 ## Dependencies
- - < dependency >
- - < dependency >
+ - **flutter_gimplese**: Core dependency for the Flutter SDUI Designer
 
 
 ## Running
 
-
-< directions to install > 
 ```bash
-< insert code >
-```
-
-< directions to execute >
-
-```bash
-< insert code >
+pub add flutter_glimpse
+flutter run
 ```
 
 ## Contributors
@@ -143,6 +139,7 @@ This project follows MVVM architecture patterns and Flutter best practices. The 
 		</td>
 	</tr>
 </table>
+
 <p align="center">
 	Made with ❤ by <a href="https://dscvit.com">GDSC-VIT</a>
 </p>
