@@ -50,7 +50,7 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
       'width': 200.0,
       'height': 300.0,
     },
-    defaultSize: const Size(200, 300),
+    defaultSize: Size(200, 300),
   ),
 
   const WidgetRegistryEntry(
@@ -98,7 +98,7 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
       'width': 200.0,
       'height': 300.0,
     },
-    defaultSize: const Size(200, 300),
+    defaultSize: Size(200, 300),
   ),
 
   const WidgetRegistryEntry(
@@ -160,7 +160,7 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
       'shadowBlurRadius': 0.0,
       'shadowSpreadRadius': 0.0,
     },
-    defaultSize: const Size(200, 100),
+    defaultSize: Size(200, 100),
   ),
 
   const WidgetRegistryEntry(
@@ -211,7 +211,7 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
       'drawerEnableOpenDragGesture': true,
       'endDrawerEnableOpenDragGesture': true,
     },
-    defaultSize: const Size(200, 300),
+    defaultSize: Size(200, 300),
   ),
 
   const WidgetRegistryEntry(
@@ -230,7 +230,7 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
       'width': 100.0,
       'height': 40.0,
     },
-    defaultSize: const Size(100, 40),
+    defaultSize: Size(100, 40),
   ),
 
   const WidgetRegistryEntry(
@@ -247,7 +247,7 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
     defaultProperties: {
       'flex': 1,
     },
-    defaultSize: const Size(0, 0),
+    defaultSize: Size(0, 0),
   ),
 
   const WidgetRegistryEntry(
@@ -324,7 +324,7 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
       'decoration': 'none',
       'textDirection': 'ltr',
     },
-    defaultSize: const Size(100, 60),
+    defaultSize: Size(100, 60),
   ),
 
   const WidgetRegistryEntry(
@@ -434,7 +434,7 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
       'scale': 1.0,
       'semanticLabel': null,
     },
-    defaultSize: const Size(100, 60),
+    defaultSize: Size(100, 60),
   ),
 
   const WidgetRegistryEntry(
@@ -469,6 +469,6 @@ final List<WidgetRegistryEntry> widgetRegistryEntries = [
       'applyTextScaling': false,
       'shadows': null,
     },
-    defaultSize: const Size(40, 40),
+    defaultSize: Size(40, 40),
   ),
 ];

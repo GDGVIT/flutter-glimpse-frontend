@@ -9,7 +9,7 @@ import 'widget_tree_service.dart';
 import 'glimpse_conversion_service.dart';
 import 'import_export_service.dart';
 
-final Uuid globalUuid = Uuid();
+const Uuid globalUuid = Uuid();
 
 class DesignCanvasViewModel extends ChangeNotifier {
   WidgetNode _rootWidgetNode;

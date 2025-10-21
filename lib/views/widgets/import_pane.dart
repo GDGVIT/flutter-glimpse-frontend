@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'package:provider/provider.dart';
 import 'package:flutter_glimpse/src/service/glimpse_grpc_client.dart';
 import 'package:flutter_glimpse/src/parser/glimpse_proto_parser.dart';

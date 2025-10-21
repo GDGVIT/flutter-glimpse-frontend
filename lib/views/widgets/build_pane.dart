@@ -255,7 +255,7 @@ class _BuildPaneState extends State<BuildPane> {
               return GridView(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                   maxCrossAxisExtent: desiredTileWidth,
                   mainAxisSpacing: 8,
                   crossAxisSpacing: 8,

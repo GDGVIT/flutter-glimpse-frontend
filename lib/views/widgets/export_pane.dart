@@ -26,7 +26,7 @@ class ExportPane extends StatelessWidget {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () async {
-              final path = 'export.json';
+              const path = 'export.json';
               await viewModel.exportToFile(path);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Exported to export.json')),

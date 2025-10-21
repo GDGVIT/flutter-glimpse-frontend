@@ -15,13 +15,13 @@ class WidgetConstraints {
       case 'GlimpseColumn':
       case 'GlimpseRow':
       case 'GlimpseStack':
-        return WidgetConstraints(canHaveChildren: true, maxChildren: -1);
+        return const WidgetConstraints(canHaveChildren: true, maxChildren: -1);
       case 'Container Widget':
       case 'GlimpseContainer':
       case 'GlimpseScaffold':
-        return WidgetConstraints(canHaveChildren: true, maxChildren: 1);
+        return const WidgetConstraints(canHaveChildren: true, maxChildren: 1);
       default:
-        return WidgetConstraints(canHaveChildren: false, maxChildren: 0);
+        return const WidgetConstraints(canHaveChildren: false, maxChildren: 0);
     }
   }
 }

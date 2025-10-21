@@ -413,123 +413,121 @@ class DesignCanvasState extends State<DesignCanvas> {
     return Column(
       children: [
         Expanded(
-          child: Container(
-            child: Scrollbar(
+          child: Scrollbar(
+            controller: _verticalScrollController,
+            thumbVisibility: true,
+            child: SingleChildScrollView(
               controller: _verticalScrollController,
-              thumbVisibility: true,
-              child: SingleChildScrollView(
-                controller: _verticalScrollController,
-                scrollDirection: Axis.vertical,
-                child: Scrollbar(
+              scrollDirection: Axis.vertical,
+              child: Scrollbar(
+                controller: _horizontalScrollController,
+                thumbVisibility: true,
+                notificationPredicate: (notif) => notif.metrics.axis == Axis.horizontal,
+                child: SingleChildScrollView(
                   controller: _horizontalScrollController,
-                  thumbVisibility: true,
-                  notificationPredicate: (notif) => notif.metrics.axis == Axis.horizontal,
-                  child: SingleChildScrollView(
-                    controller: _horizontalScrollController,
-                    scrollDirection: Axis.horizontal,
-                    child: SizedBox(
-                      width: canvasWidth,
-                      height: canvasHeight,
-                      child: Stack(
-                        children: [
-                          // Background grid
-                          Positioned.fill(
-                            child: CustomPaint(
-                              painter: _GridBackgroundPainter(
-                                scale: _canvasScale,
+                  scrollDirection: Axis.horizontal,
+                  child: SizedBox(
+                    width: canvasWidth,
+                    height: canvasHeight,
+                    child: Stack(
+                      children: [
+                        // Background grid
+                        Positioned.fill(
+                          child: CustomPaint(
+                            painter: _GridBackgroundPainter(
+                              scale: _canvasScale,
+                              offset: _canvasOffset,
+                            ),
+                          ),
+                        ),
+                        // Canvas controls
+                        Positioned(
+                          bottom: 16,
+                          right: 16,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF2F2F2F),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: const Color(0xFF424242), width: 1),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.3),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _canvasScale = (_canvasScale / 1.2).clamp(0.2, 5.0);
+                                    });
+                                  },
+                                  icon: const Icon(Icons.remove, color: Color(0xFFEDF1EE), size: 16),
+                                  tooltip: 'Zoom Out',
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                  child: Text(
+                                    '${(_canvasScale * 100).round()}%',
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(color: Color(0xFFEDF1EE), fontSize: 12, fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _canvasScale = (_canvasScale * 1.2).clamp(0.2, 5.0);
+                                    });
+                                  },
+                                  icon: const Icon(Icons.add, color: Color(0xFFEDF1EE), size: 16),
+                                  tooltip: 'Zoom In',
+                                ),
+                                const SizedBox(width: 8),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _canvasScale = 1.0;
+                                      _canvasOffset = Offset.zero;
+                                    });
+                                  },
+                                  icon: const Icon(Icons.center_focus_strong, color: Color(0xFFEDF1EE), size: 16),
+                                  tooltip: 'Reset View',
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        // Main content
+                        Positioned.fill(
+                          child: Listener(
+                            onPointerHover: _updatePointerPosition,
+                            onPointerMove: _updatePointerPosition,
+                            child: Transform.scale(
+                              scale: _canvasScale,
+                              child: Transform.translate(
                                 offset: _canvasOffset,
-                              ),
-                            ),
-                          ),
-                          // Canvas controls
-                          Positioned(
-                            bottom: 16,
-                            right: 16,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF2F2F2F),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(color: const Color(0xFF424242), width: 1),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.3),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 4),
-                                  ),
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _canvasScale = (_canvasScale / 1.2).clamp(0.2, 5.0);
-                                      });
-                                    },
-                                    icon: const Icon(Icons.remove, color: Color(0xFFEDF1EE), size: 16),
-                                    tooltip: 'Zoom Out',
-                                  ),
-                                  SizedBox(
-                                    width: 40,
-                                    child: Text(
-                                      '${(_canvasScale * 100).round()}%',
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(color: Color(0xFFEDF1EE), fontSize: 12, fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _canvasScale = (_canvasScale * 1.2).clamp(0.2, 5.0);
-                                      });
-                                    },
-                                    icon: const Icon(Icons.add, color: Color(0xFFEDF1EE), size: 16),
-                                    tooltip: 'Zoom In',
-                                  ),
-                                  const SizedBox(width: 8),
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _canvasScale = 1.0;
-                                        _canvasOffset = Offset.zero;
-                                      });
-                                    },
-                                    icon: const Icon(Icons.center_focus_strong, color: Color(0xFFEDF1EE), size: 16),
-                                    tooltip: 'Reset View',
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          // Main content
-                          Positioned.fill(
-                            child: Listener(
-                              onPointerHover: _updatePointerPosition,
-                              onPointerMove: _updatePointerPosition,
-                              child: Transform.scale(
-                                scale: _canvasScale,
-                                child: Transform.translate(
-                                  offset: _canvasOffset,
-                                  child: Stack(
-                                    clipBehavior: Clip.none,
-                                    children: [
-                                      widgetNodeDndWrapper(widget.widgetRoot, 0),
-                                      if (_isDraggingFromPalette && _draggedWidgetData != null && _dragPointerPositionLocal != null)
-                                        Positioned(
-                                          left: _dragPointerPositionLocal!.dx,
-                                          top: _dragPointerPositionLocal!.dy,
-                                          child: buildPaletteDragFeedback(_draggedWidgetData!),
-                                        ),
-                                    ],
-                                  ),
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    widgetNodeDndWrapper(widget.widgetRoot, 0),
+                                    if (_isDraggingFromPalette && _draggedWidgetData != null && _dragPointerPositionLocal != null)
+                                      Positioned(
+                                        left: _dragPointerPositionLocal!.dx,
+                                        top: _dragPointerPositionLocal!.dy,
+                                        child: buildPaletteDragFeedback(_draggedWidgetData!),
+                                      ),
+                                  ],
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
